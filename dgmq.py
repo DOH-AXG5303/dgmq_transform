@@ -149,24 +149,30 @@ def remove_counties(input_df):
     return df
 def infection_check(input_df):
     """
-    Filters out all data except when date tested is:
-    greater than or equal to departure date AND
-    less than or equal to arrival date
-    or test took place on or between departure and arrival dates.
+    Filters out all data except the rows where either departure or arrival date fall within the range:
+    [2 days before test, 10 days after test]
 
     args:
         input_df: dataframe
     return: datafrmae
     """
     df = input_df.copy()
+    
+    days2 = timedelta(days=2)
+    days10 = timedelta(days=10)
 
-    condition_1 = df["Trip Departure Date"] <= df["Date Tested WDRS (Person) (Person)"]
+    #departure date falls within the range of [2 days before test, 10 days after test]
+    condition_departure = (df["Date Tested WDRS (Person) (Person)"]-days2 <= df["Trip Departure Date"]) & (df["Trip Departure Date"] <= (df["Date Tested WDRS (Person) (Person)"]+days10))
 
-    condition_2 = df["Trip Arrival Date"] >= df["Date Tested WDRS (Person) (Person)"]
+    #arrival date falls within the range of [2 days before test, 10 days after test]
+    condition_arrival = (df["Date Tested WDRS (Person) (Person)"]-days2 <= df["Trip Arrival Date"]) & (df["Trip Arrival Date"] <= (df["Date Tested WDRS (Person) (Person)"]+days10))
 
-    df = df[condition_1 & condition_2].copy()
+
+    df = df[condition_departure & condition_arrival].copy()
 
     return df
+
+
 def remove_if_present_in_records(df_travel, df_records):
     """
     Compare travel dataframe against records dataframe. Remove any rows from df_travel, if present
@@ -205,7 +211,7 @@ if (__name__ == "__main__"):
                  .pipe(remove_old_travel)
                  .pipe(remove_counties))
 
-    # travel_df = travel_df.pipe(infection_check)
+    travel_df = travel_df.pipe(infection_check)
     travel_df = remove_if_present_in_records(travel_df, dataframes_dict["Records"])
 
     travel_df.to_csv("./Result.csv", index=False)
