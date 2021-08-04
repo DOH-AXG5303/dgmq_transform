@@ -34,8 +34,8 @@ No installation required except prerequisite python modules.
 			- LHJ column is either "DOH only" or within list of tracked counties
 			- County column is either blank or within list of tracked counties
 		Keep data only if both are True:
-			- Departure date <= 14 days of test date
-			- Arrival date <= 14 days test date
+			- Departure date falls within 2 days before and 10 days after test date
+			- Arrival date falls within 2 days before and 10 days after test date
 
 ## Contributors
 Original author: Alexey Gilman
