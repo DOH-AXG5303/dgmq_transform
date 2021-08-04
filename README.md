@@ -3,7 +3,7 @@
 DGMQ Data Filter is a script that allows DGMQ data owner to automatically filter data from .xlsx
 format and output result into a .csv file in the present working directory. 
 
-## Prerequisites
+## Requirements
 	- python=3.8*
 	- pandas=1.2*
 	- openpyxl=3.0*
