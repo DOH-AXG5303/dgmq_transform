@@ -4,9 +4,9 @@ DGMQ Data Filter is a script that allows DGMQ data owner to automatically filter
 format and output result into a .csv file in the present working directory. 
 
 ## Requirements
-	- python=3.8*
-	- pandas=1.2*
-	- openpyxl=3.0*
+- python=3.8*
+- pandas=1.2*
+- openpyxl=3.0*
 
 ## Installing
 No installation required except prerequisite python modules. 
@@ -19,23 +19,25 @@ No installation required except prerequisite python modules.
 
 
 ## Performed operations
-	- Perform checks:
-		Presence of 2 and only 2 .xlsx files
-		Presence of file titled "Records.xlsx"
-	- Load 2 .xlsx files in present working directory into python dataframe
-	- Perform checks:
-		Columns names match
-		Columns data type match
-	- Perform filtering:
-		Remove when event ID is blank
-		Remove when departure AND arrival dates are blank
-		Remove when departure airport and Arrival airport are blank
-		Keep data only if both are True:
-			- LHJ column is either "DOH only" or within list of tracked counties
-			- County column is either blank or within list of tracked counties
-		Keep data only if both are True:
-			- Departure date falls within 2 days before and 10 days after test date
-			- Arrival date falls within 2 days before and 10 days after test date
+- Perform checks:
+    - Presence of 2 and only 2 .xlsx files
+    - Presence of file titled "Records.xlsx"
+- Load 2 .xlsx files in present working directory into python dataframe
+- Perform checks:
+    - Columns names match
+    - Columns data type match
+- Perform filtering:
+    - Remove when event ID is blank
+    - Remove when departure AND arrival dates are blank
+    - Remove when departure airport and Arrival airport are blank
+    - Remove data if arrival AND departure dates are greater than 14 days from script run 
+    - Keep data only if both are True:
+        - LHJ column is either "DOH only" or within list of tracked counties
+        - County column is either blank or within list of tracked counties
+    -Keep data only if both are True:
+        - Departure date falls within 2 days before and 10 days after test date
+        - Arrival date falls within 2 days before and 10 days after test date
+
 
 ## Contributors
 Original author: Alexey Gilman
