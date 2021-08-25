@@ -116,7 +116,7 @@ def remove_old_travel(input_df):
     df = input_df.copy()
 
     now = datetime.today()
-    days14 = timedelta(days=14)
+    days14 = timedelta(days=15) #15 days to account for CREST timestamps at 00:00 of every day. 
 
     condition_arrival = (now - df['Trip Arrival Date']) > days14
     condition_departure = (now - df['Trip Departure Date']) > days14
