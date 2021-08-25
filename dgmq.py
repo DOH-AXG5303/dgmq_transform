@@ -4,13 +4,18 @@ import numpy as np
 from datetime import datetime, timedelta
 
 
-def scan_directory():
+def scan_directory(path_input = None):
     """
-    Query present working directory for all .xlsx files
+    Query directory for all .xlsx files. Defaults to present working directory. 
 
+    args:
+        path_input = string, path to directory to be scanned. 
     return: list of .xlsx file names
     """
-    path = "./"  # path to pwd
+    if path_input is None:
+        path = "./"
+        
+    path = path_input 
     files = []
 
     # iterate filenames in directory and append .xlsx to files list
@@ -19,7 +24,6 @@ def scan_directory():
             files.append(fname)
         else:
             pass
-
     return files
 def check_xlsx_files(files):
     """
